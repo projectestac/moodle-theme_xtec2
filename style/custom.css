@@ -110,6 +110,12 @@ h3{
 	filter: brightness(0) [[setting:color3b]];
 }
 
+.block .header .moodle-actionmenu[data-enhanced] .menu img{
+	-webkit-filter: none;
+	-moz-filter: none;
+	filter: none;
+}
+
 
 .block .header, #dockeditempanel .dockeditempanel_hd{
 	color: [[setting:color3]];
@@ -326,6 +332,7 @@ h3{
     line-height: 32px;
     font-size: 20px;
     color: white;
+    vertical-align: middle;
 }
 
 #page-footer-top .social-icons  i.fa-globe{
