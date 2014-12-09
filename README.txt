@@ -61,7 +61,7 @@ This theme is developed for:
 
 This theme includes external resources like:
    - Abecedario: True Type Font by George Williams (revised version)
-   - FontAwesome    (http://fortawesome.github.io/Font-Awesome/)
+   - FontAwesome 4.2.0  (http://fortawesome.github.io/Font-Awesome/)
    - Some code to show Fontawesome icons is based on Essential Moodle theme (https://gjb2048.github.io/moodle-theme_essential/)
 
 Special Thanks:
