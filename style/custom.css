@@ -101,8 +101,8 @@ h3{
 	text-shadow: 0 1px 0 [[setting:color3a]];
 }
 
-.block .header a,  #dockeditempanel .dockeditempanel_hd a,
-.block .header a i.fa,  #dockeditempanel .dockeditempanel_hd a  i.fa{
+.block .header .menubar a,  #dockeditempanel .dockeditempanel_hd .menubar  a,
+.block .header .menubar a  i.fa,  #dockeditempanel .dockeditempanel_hd .menubar a  i.fa{
 	color: [[setting:color3]];
 }
 
@@ -114,6 +114,7 @@ h3{
 	filter: brightness(0) [[setting:color3b]];
 }
 
+#dockeditempanel .dockeditempanel_hd  .menu img,
 .block .header .moodle-actionmenu[data-enhanced] .menu img{
 	-webkit-filter: none;
 	-moz-filter: none;
