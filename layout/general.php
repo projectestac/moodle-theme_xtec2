@@ -123,11 +123,7 @@ echo $OUTPUT->doctype() ?>
                     </ul>
                 <?php } ?>
                 <?php if($hascustommenu) { ?>
-                    <a class="btn btn-navbar visible-phone" data-toggle="collapse" data-target="#custom-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
+
                 <?php } ?>
             </div>
         </div>
@@ -140,9 +136,14 @@ echo $OUTPUT->doctype() ?>
     </div>
 </div>
 
-<div id="main_navigation" class="clearfix">
+<div id="main_navigation" class="clearfix navbar">
     <div class="container-fluid">
         <?php if($hascustommenu) { ?>
+            <a class="btn btn-navbar visible-phone" data-toggle="collapse" data-target="#custom-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
             <div id="custom_menu" class="pull-left">
                 <div class="nav-collapse collapse" id="custom-collapse">
                     <?php echo $custommenu; ?>
@@ -153,8 +154,8 @@ echo $OUTPUT->doctype() ?>
             <div id="showhideblocks" class="hidden-phone pull-right collapsed" title="<?php echo get_string('showhideblocks','theme_xtec2');?>" onclick="showhideblocks();"></div>
         <?php } ?>
         <?php if($hasmainmenu) { ?>
-            <div id="main_menu" class="pull-right hidden-phone">
-                <div class="nav-collapse collapse">
+            <div id="main_menu" class="pull-right">
+                <div class="nav-collapse collapse hidden-phone">
                     <?php echo $mainmenu; ?>
                 </div>
             </div>
