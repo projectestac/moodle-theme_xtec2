@@ -631,6 +631,10 @@ body.path-grade-report-grader #user-grades {
     margin-top: 4px;
 }
 
+.path-grade-report-grader .gradeparent .left_scroller {
+    margin-top: 20px;
+}
+
 #page-footer .performanceinfo{
 	margin: 0;
 }
