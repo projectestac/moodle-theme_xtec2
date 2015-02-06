@@ -61,34 +61,44 @@ if($COURSE->format == 'simple'){
     }
 }
 
-$showsidepre = ($hassidepre && !$PAGE->blocks->region_completely_docked('side-pre', $OUTPUT));
-$showsidepost = ($hassidepost && !$PAGE->blocks->region_completely_docked('side-post', $OUTPUT));
-
-if($showsidepre && $showsidepost){
+if ($PAGE->user_is_editing()) {
     $showhidebutton = true;
     $spanpre = 4;
     $spanmainpre = 8;
     $spanmainpost = 9;
     $spanpost = 3;
-} else if($showsidepre){
-    $showhidebutton = true;
-    $spanpre = 3;
-    $spanmainpre = 9;
-    $spanmainpost = 12;
-    $spanpost = 0;
-} else if($showsidepost){
-    $showhidebutton = true;
-    $spanpre = 0;
-    $spanmainpre = 12;
-    $spanmainpost = 9;
-    $spanpost = 3;
 } else {
-    $showhidebutton = false;
-    $spanpre = 0;
-    $spanmainpre = 12;
-    $spanmainpost = 12;
-    $spanpost = 0;
+    $showsidepre = ($hassidepre && !$PAGE->blocks->region_completely_docked('side-pre', $OUTPUT));
+    $showsidepost = ($hassidepost && !$PAGE->blocks->region_completely_docked('side-post', $OUTPUT));
+
+    if($showsidepre && $showsidepost){
+        $showhidebutton = true;
+        $spanpre = 4;
+        $spanmainpre = 8;
+        $spanmainpost = 9;
+        $spanpost = 3;
+    } else if($showsidepre){
+        $showhidebutton = true;
+        $spanpre = 3;
+        $spanmainpre = 9;
+        $spanmainpost = 12;
+        $spanpost = 0;
+    } else if($showsidepost){
+        $showhidebutton = true;
+        $spanpre = 0;
+        $spanmainpre = 12;
+        $spanmainpost = 9;
+        $spanpost = 3;
+    } else {
+        $showhidebutton = false;
+        $spanpre = 0;
+        $spanmainpre = 12;
+        $spanmainpost = 12;
+        $spanpost = 0;
+    }
 }
+
+
 
 if (right_to_left()) {
     $regionbsid = 'region-bs-main-and-post';
