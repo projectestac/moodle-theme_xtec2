@@ -514,7 +514,7 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
         if (isloggedin() && has_capability('moodle/site:config', context_system::instance())) {
             if ($adminmsg = self::get_alert_message($pluginconfig, 'admin_alert')) {
                 $text .= '<div class="admin_alert">'.$adminmsg;
-                $text .= '<div style="font-size:smaller">' . get_string('show_admins', 'block_advices') . '</div></div>';
+                $text .= '<div style="font-size:smaller">' . get_string('show_admins', 'theme_xtec2') . '</div></div>';
             }
         }
 
@@ -522,7 +522,7 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
             $text .= '<div class="all_alert">'.$agoramsg.'</div>';
         }
         if (!empty($text)) {
-            $title = get_string('advices', 'block_advices');
+            $title = get_string('advices', 'theme_xtec2');
             $skiptitle = strip_tags($title);
             $skipid = 'agora_alerts_skip';
 
