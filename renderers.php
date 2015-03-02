@@ -339,8 +339,8 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
     function social_icons() {
         global $DB;
 
-		$social_icons_cache = cache::make('core', 'htmlpurifier');
-		if ($text = $social_icons_cache->get('social_icons')) {
+		$cache = cache::make('core', 'htmlpurifier');
+		if ($text = $cache->get('social_icons')) {
 			return $text;
 		}
         global $school_info, $CFG, $OUTPUT;
@@ -384,7 +384,7 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
 		if ($url = get_config('theme_xtec2', 'youtube')) {
 			$content .= '<a href="'.$url.'" target="_blank"><i class="fa fa-youtube" title="Youtube"></i></a>';
 		}
-        $social_icons_cache->set('social_icons', $content);
+        $cache->set('social_icons', $content);
         return $content;
     }
 
@@ -509,6 +509,12 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
         }
 
         $renderized = true;
+
+        $cache = cache::make('core', 'htmlpurifier');
+        if ($text = $cache->get('agora_alerts')) {
+            return $text;
+        }
+
         $text = "";
         $pluginconfig = get_config('theme_xtec2');
         if (isloggedin() && has_capability('moodle/site:config', context_system::instance())) {
@@ -537,9 +543,11 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
             $output .= html_writer::end_tag('div');
 
             $output .= html_writer::tag('span', '', array('id' => 'sb-' . $skipid, 'class' => 'skip-block-to'));
+            $cache->set('agora_alerts', $output);
             return $output;
         }
 
+        $cache->set('agora_alerts', "");
         return "";
     }
 

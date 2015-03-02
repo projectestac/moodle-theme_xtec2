@@ -325,6 +325,7 @@ if ($ADMIN->fulltree) {
         $default = '';
         $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
         $settings->add($setting);
+        $setting->set_updatedcallback('theme_reset_all_caches');
 
         $name = 'theme_xtec2/agora_alert_start';
         $title = get_string('alert_start', 'theme_xtec2');
@@ -332,6 +333,7 @@ if ($ADMIN->fulltree) {
         $default = '';
         $setting = new admin_setting_configtext($name, $title, $description, $default);
         $settings->add($setting);
+        $setting->set_updatedcallback('theme_reset_all_caches');
 
         $name = 'theme_xtec2/agora_alert_end';
         $title = get_string('alert_end', 'theme_xtec2');
@@ -339,6 +341,7 @@ if ($ADMIN->fulltree) {
         $default = '';
         $setting = new admin_setting_configtext($name, $title, $description, $default);
         $settings->add($setting);
+        $setting->set_updatedcallback('theme_reset_all_caches');
 
         $setting = new admin_setting_heading('theme_xtec2/advices_admin', get_string('advices_admin', 'theme_xtec2'), "");
         $settings->add($setting);
@@ -349,6 +352,7 @@ if ($ADMIN->fulltree) {
         $default = '';
         $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
         $settings->add($setting);
+        $setting->set_updatedcallback('theme_reset_all_caches');
 
         $name = 'theme_xtec2/admin_alert_start';
         $title = get_string('alert_start', 'theme_xtec2');
@@ -356,6 +360,7 @@ if ($ADMIN->fulltree) {
         $default = '';
         $setting = new admin_setting_configtext($name, $title, $description, $default);
         $settings->add($setting);
+        $setting->set_updatedcallback('theme_reset_all_caches');
 
         $name = 'theme_xtec2/admin_alert_end';
         $title = get_string('alert_end', 'theme_xtec2');
@@ -363,6 +368,7 @@ if ($ADMIN->fulltree) {
         $default = '';
         $setting = new admin_setting_configtext($name, $title, $description, $default);
         $settings->add($setting);
+        $setting->set_updatedcallback('theme_reset_all_caches');
     }
 
 }
