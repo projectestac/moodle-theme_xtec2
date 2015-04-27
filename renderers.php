@@ -16,6 +16,21 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
         return parent::user_picture($user, $options);
     }
 
+
+
+    public function messages_menu() {
+        global $CFG;
+        if (isloggedin() && !isguestuser()) {
+            if (file_exists($CFG->dirroot.'/local/agora/message_notifier/global.lib.php')) {
+                require_once($CFG->dirroot.'/local/agora/message_notifier/global.lib.php');
+                if (function_exists('message_notifier_get_badge')) {
+                    return message_notifier_get_badge();
+                }
+            }
+        }
+        return "";
+    }
+
 	/**
      * Return the standard string that says whether you are logged in (and switched
      * roles/logged in as another user).
@@ -131,15 +146,7 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
             }
         }
 
-        if (isloggedin() && !isguestuser()) {
-            if (file_exists($CFG->dirroot.'/local/agora/message_notifier/global.lib.php')) {
-                require_once($CFG->dirroot.'/local/agora/message_notifier/global.lib.php');
-                if (function_exists('message_notifier_get_badge')) {
-                    $messages = message_notifier_get_badge();
-                    $loggedinas .= $messages;
-                }
-            }
-		}
+
         return $loggedinas;
     }
 
@@ -147,27 +154,17 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
 
     	$options = array();
 
-    	$mymoodle = $this->page->navigation->get('home');
-    	if ($mymoodle) {
-			$options[] = theme_xtec2_render_user_settings($mymoodle, array(), null, array(), 2);
-		}
     	$myprofile = $this->page->navigation->get('myprofile');
 		if ($myprofile && $myprofile->has_children()) {
 			foreach ($myprofile->children as $child) {
 				$options[] = theme_xtec2_render_user_settings($child, array(), null, array(), 2);
 			}
 		}
-        if ($this->page->navigation->get('myprofile')) {
-            $this->page->navigation->get('myprofile')->hide();
-        }
 
     	$usernav = $this->page->settingsnav->get('usercurrentsettings');
 		if ($usernav && $usernav->has_children()) {
 			$options[] = theme_xtec2_render_user_settings($usernav, array(), null, array(), 2);
 		}
-        if ($this->page->settingsnav->get('usercurrentsettings')) {
-            $this->page->settingsnav->get('usercurrentsettings')->hide();
-        }
 
 		return $options;
     }

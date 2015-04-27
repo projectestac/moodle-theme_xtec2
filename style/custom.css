@@ -17,7 +17,7 @@ body{
     [[setting:fontstyle]];
 }
 
-a {
+.usermenu .login a, a {
 	color: [[setting:color5]]; /* Color*/
 }
 
@@ -280,6 +280,13 @@ h3{
 
 #main_navigation.navbar .nav>li>a {
     text-shadow: none;
+}
+
+.jsenabled .usermenu .moodle-actionmenu.show .menu a:hover{
+    text-decoration: none;
+    color: [[setting:color3]];
+    background-color: [[setting:color2]];
+    background-image: none;
 }
 
 .dropdown-menu{
