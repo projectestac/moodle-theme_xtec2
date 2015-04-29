@@ -133,3 +133,28 @@ function showhideblocks(){
     blocks_shown = !blocks_shown;
 }
 
+
+M.theme_xtec2 = {};
+
+M.theme_xtec2.init = function(Y) {
+
+    var usermenu = Y.one('#usermenu');
+
+    if (usermenu == null) {
+        return;
+    }
+
+    Y.one('#usermenu_toogle').on('clickoutside', function () {
+        usermenu.removeClass('open');
+    });
+
+    Y.one('#usermenu_toogle').on('click', function (e){
+        if (!usermenu.hasClass('open')) {
+            usermenu.addClass('open');
+        } else {
+            usermenu.removeClass('open');
+        }
+        e.stopPropagation();
+        return false;
+    });
+};

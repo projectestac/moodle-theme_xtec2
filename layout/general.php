@@ -124,16 +124,11 @@ echo $OUTPUT->doctype() ?>
 			<a class="brand mainbrand" href="<?php echo $CFG->wwwroot;?>"><?php echo $SITE->fullname; ?></a>
             <div class="navbar">
                 <?php if($haslogin) { ?>
-                    <ul class="nav pull-right">
+
+                    <ul class="nav-collapse nav pull-right" id="user-collapse">
                         <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
                         <li><?php echo $OUTPUT->messages_menu(); ?></li>
-                        <li class="navbar-text"><a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </a>
-                        <?php echo $OUTPUT->user_menu(); ?></li>
-                        <li class="navbar-text"><?php echo $OUTPUT->login_info() ?></li>
+                        <li class="navbar-text"><?php echo $OUTPUT->user_menu(); ?></li>
                     </ul>
                 <?php } ?>
             </div>

@@ -17,7 +17,7 @@ body{
     [[setting:fontstyle]];
 }
 
-.usermenu .login a, a {
+a, .usermenu .login a {
 	color: [[setting:color5]]; /* Color*/
 }
 
@@ -282,15 +282,66 @@ h3{
     text-shadow: none;
 }
 
-.jsenabled .usermenu .moodle-actionmenu.show .menu a:hover{
+/* User menu*/
+#usermenu .dropdown-toggle {
+    padding-right: 8px;
+    padding-left: 8px;
+    display: block;
+    color: #777;
+}
+
+#usermenu a.dropdown-toggle:hover{
+    color: black;
+    text-decoration: none;
+}
+
+#usermenu .dropdown-toggle .caret {
+  margin-top: 8px;
+  margin-left: 2px;
+  border-top-color: #777;
+  position: relative;
+  top: 9px;
+  display: inline-block;
+}
+
+#usermenu .dropdown-toggle img {
+    margin-left: 6px;
+    margin-right: 6px;
+    width: 32px;
+    height: 32px;
+}
+
+#usermenu .dropdown-menu a:hover{
     text-decoration: none;
     color: [[setting:color3]];
     background-color: [[setting:color2]];
     background-image: none;
 }
 
+#usermenu .dropdown-menu a {
+  display: block;
+  padding: 2px 1em 2px 28px;
+  color: #333;
+}
+
+#usermenu .dropdown-menu i.fa {
+  width: 12px;
+  height: 12px;
+  line-height: 12px;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+#usermenu .dropdown-menu .iconsmall {
+  margin: 4px 4px 4px -24px;
+}
+
+.dropdown-submenu.icon>a:after {
+    margin-top: 8px;
+}
+
 .dropdown-menu{
-    background-color: #f5f5f5;
+    background-color: white;
     border: 1px solid #e3e3e3;
     border-radius: 4px;
 }
@@ -720,7 +771,7 @@ body.path-grade-report-grader #user-grades {
 		height: 0;
 		overflow: hidden;
 	}
-	.navbar .nav-collapse, .navbar .nav-collapse.active, .navbar .nav-collapse.active{
+	.navbar .nav-collapse.active, .navbar .nav-collapse.active{
         border: 0;
 		height: auto;
 		overflow: visible;

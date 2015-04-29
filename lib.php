@@ -304,31 +304,26 @@ function theme_xtec2_get_html_for_settings(renderer_base $output, moodle_page $p
     return $return;
 }
 
-function theme_xtec2_render_user_settings($node, $attrs=array(), $expansionlimit=null, array $options = array(), $depth=1){
+function theme_xtec2_render_dropdown_menu($node, $attrs = array(), $expansionlimit = null, array $options = array()) {
 	global $CFG, $OUTPUT, $PAGE;
 
-	if(!$node) return '';
+	if (!$node) {
+        return "";
+    }
 
 	if (!$node->display && !$node->contains_active_node()) {
 		return '';
 	}
 
 	$contenttext = $node->get_content();
+
+    if ($contenttext === '') {
+        return "";
+    }
+
 	$title = $node->get_title();
 	$liclasses = "";
 	$isexpandable = (empty($expansionlimit) || ($node->type > navigation_node::TYPE_ACTIVITY || $node->type < $expansionlimit) || ($node->contains_active_node() && ($node->children && $node->children->count() > 0)));
-
-	/*$isbranch = $isexpandable && (($node->children && $node->children->count() > 0) || ($node->has_children() && (isloggedin() || $node->type <= navigation_node::TYPE_CATEGORY)));
-	$hasicon = ((!$isbranch || $node->type == navigation_node::TYPE_ACTIVITY )&& $node->icon instanceof renderable);
-	if ($hasicon) {
-		$icon = $OUTPUT->render($node->icon);
-		$contenttext = $icon.$contenttext; // use CSS for spacing of icons
-	}
-	if ($node->helpbutton !== null) {
-		$contenttext = trim($node->helpbutton).$contenttext;
-	}*/
-
-	if ($contenttext === '') return '';
 
 	$attributes = array();
 	if ($title !== '') {
@@ -338,13 +333,15 @@ function theme_xtec2_render_user_settings($node, $attrs=array(), $expansionlimit
 	if (is_string($node->action) || empty($node->action) || ($node->type === navigation_node::TYPE_CATEGORY && empty($options['linkcategories']))) {
 		$action = $contenttext;
 	} else if ($node->action instanceof action_link) {
-		//TODO: to be replaced with something else
+		// TODO: to be replaced with something else
 		$link = $node->action;
 		$link->attributes = array_merge($link->attributes, $attributes);
 		$action = $OUTPUT->render($link);
 	} else if ($node->action instanceof moodle_url) {
 		$action = html_writer::link($node->action, $contenttext, $attributes);
-	} else return "";
+	} else {
+        return "";
+    }
 
 	// this applies to the li item which contains all child lists too
 	$content = $action;
@@ -353,21 +350,21 @@ function theme_xtec2_render_user_settings($node, $attrs=array(), $expansionlimit
 		$liclasses = 'disabled';
 	}
 
-	if($isexpandable){
+	if ($isexpandable) {
 		$children = array();
 
-		foreach($node->children as $child){
-			$children[] = theme_xtec2_render_user_settings($child, array(), $expansionlimit, $options, $depth+1);
+		foreach ($node->children as $child) {
+			$children[] = theme_xtec2_render_dropdown_menu($child, array(), $expansionlimit, $options);
 		}
 
-		if(!empty($children)){
-			if((!is_string($node->action) && !empty($node->action))){
-				array_unshift($children,html_writer::tag('li', $action));
+		if (!empty($children)) {
+			if ((!is_string($node->action) && !empty($node->action))) {
+				array_unshift($children, html_writer::tag('li', $action));
 			}
 			$content = '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'.$contenttext.'</a>';
-			$content .= html_writer::tag('ul', implode("\n", $children), array('class'=>'dropdown-menu'));
+			$content .= html_writer::tag('ul', implode("\n", $children), array('class' => 'dropdown-menu'));
 			$liclasses .= ' dropdown-submenu pull-left';
-		} else if(empty($node->action)){
+		} else if (empty($node->action)) {
             // Loaded by ajax but no action
             return "";
         } else {
@@ -375,7 +372,7 @@ function theme_xtec2_render_user_settings($node, $attrs=array(), $expansionlimit
         }
 	}
 
-	return html_writer::tag('li', $content, array('class'=> $liclasses));
+	return html_writer::tag('li', $content, array('class' => $liclasses));
 }
 
 function theme_xtec2_is_service_enabled($service) {
