@@ -255,6 +255,21 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
         $menu .= '</ul>';
         $menu .= '</div>';
 
+        return $menu;
+    }
+
+    public function standard_end_of_body_html() {
+        global $CFG;
+
+        // This function is normally called from a layout.php file in {@link core_renderer::header()}
+        // but some of the content won't be known until later, so we return a placeholder
+        // for now. This will be replaced with the real content in {@link core_renderer::footer()}.
+        $output = '';
+        if (!empty($CFG->additionalhtmlfooter)) {
+            $output .= "\n".$CFG->additionalhtmlfooter;
+        }
+        $output .= $this->unique_end_html_token;
+
         $jsmodule = array(
             'name'     => 'theme_xtec2',
             'fullpath' => '/theme/xtec2/javascript/xtec2_footer.js',
@@ -262,7 +277,7 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
         );
         $this->page->requires->js_init_call('M.theme_xtec2.init',array(), true, $jsmodule);
 
-        return $menu;
+        return $output;
     }
 
     /*

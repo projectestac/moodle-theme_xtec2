@@ -96,6 +96,10 @@ h3{
 	padding-top: 8px;
 }
 
+.block .header h2 {
+    cursor: pointer;
+}
+
 .block .header h2, #dockeditempanel .dockeditempanel_hd h2{
 	color: [[setting:color3]];
 	text-shadow: 0 1px 0 [[setting:color3a]];
@@ -322,6 +326,10 @@ h3{
   display: block;
   padding: 2px 1em 2px 28px;
   color: #333;
+}
+
+#usermenu .dropdown-menu a:hover i.fa {
+    color: [[setting:color3]];
 }
 
 #usermenu .dropdown-menu i.fa {

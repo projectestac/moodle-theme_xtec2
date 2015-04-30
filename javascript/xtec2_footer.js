@@ -134,21 +134,23 @@ M.theme_xtec2.init = function(Y) {
 
     var usermenu = Y.one('#usermenu');
 
-    if (usermenu == null) {
-        return;
+    if (usermenu != null) {
+
+        Y.one('#usermenu_toogle').on('clickoutside', function () {
+            usermenu.removeClass('open');
+        });
+
+        Y.one('#usermenu_toogle').on('click', function (e){
+            usermenu.toggleClass('open');
+            e.stopPropagation();
+            return false;
+        });
     }
 
-    Y.one('#usermenu_toogle').on('clickoutside', function () {
-        usermenu.removeClass('open');
-    });
-
-    Y.one('#usermenu_toogle').on('click', function (e){
-        if (!usermenu.hasClass('open')) {
-            usermenu.addClass('open');
-        } else {
-            usermenu.removeClass('open');
-        }
+    Y.on('click', function (e) {
+        this.ancestor(".block").toggleClass('hidden');
         e.stopPropagation();
         return false;
-    });
+    }
+    , '.block .header h2');
 };
