@@ -330,15 +330,22 @@ function theme_xtec2_render_dropdown_menu($node, $attrs = array(), $expansionlim
 		$attributes['title'] = $title;
 	}
 
+    if ($node->icon instanceof renderable && !$node->hideicon && $node->icon->pix != 'i/navigationitem') {
+        $icon = $OUTPUT->render($node->icon);
+    } else {
+        $icon = "";
+    }
+
 	if (is_string($node->action) || empty($node->action) || ($node->type === navigation_node::TYPE_CATEGORY && empty($options['linkcategories']))) {
-		$action = $contenttext;
+		$action = $icon.$contenttext;
 	} else if ($node->action instanceof action_link) {
 		// TODO: to be replaced with something else
 		$link = $node->action;
+        $link->text = $icon.$link->text;
 		$link->attributes = array_merge($link->attributes, $attributes);
 		$action = $OUTPUT->render($link);
 	} else if ($node->action instanceof moodle_url) {
-		$action = html_writer::link($node->action, $contenttext, $attributes);
+		$action = html_writer::link($node->action, $icon.$contenttext, $attributes);
 	} else {
         return "";
     }

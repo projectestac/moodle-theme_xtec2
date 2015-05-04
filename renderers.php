@@ -385,7 +385,7 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
             $content .= '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" title="'.get_string('pluginname', 'block_navigation').'">';
             $content .= get_string('pluginname', 'block_navigation').'<b class="caret"></b></a><ul class="dropdown-menu pull-right">';
             foreach ($navigation->children as $child) {
-                if ($child->key != 'currentcourse' && $child->key != 'home') {
+                if ($child->key != 'currentcourse' && $child->key != 'home' && $child->key != 'myprofile') {
                     $content .= theme_xtec2_render_dropdown_menu($child);
                 }
 
@@ -398,7 +398,9 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
             $content .= '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" title="'.get_string('pluginname', 'block_settings').'">';
             $content .= get_string('pluginname', 'block_settings').'<b class="caret"></b></a><ul class="dropdown-menu pull-right">';
             foreach ($settings->children as $child) {
-                $content .= theme_xtec2_render_dropdown_menu($child);
+                if ($child->key != 'usercurrentsettings') {
+                    $content .= theme_xtec2_render_dropdown_menu($child);
+                }
             }
             if (has_capability('moodle/site:config', context_system::instance())) {
                 $content .= '<li><form class="navbar-search" method="get" action="'.$CFG->wwwroot.'/'.$CFG->admin.'/search.php"><input type="text" class="search-query" name="query" placeholder="'.get_string('search').'"></form></li>';
@@ -468,6 +470,10 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
         if (get_config('theme_xtec2', 'intranet') && theme_xtec2_is_service_enabled('intranet')) {
             $content .= '<a href="'.get_service_url('intranet').'" target="_blank" class="agora-social icon intranet"><img src="'.$OUTPUT->pix_url('intranet-32', 'theme').'" alt="" title="Intranet" /></a>';
         }
+        if ($url = get_config('theme_xtec2', 'whatsapp')) {
+            $content .= '<a href="tel:'.$url.'" target="_blank"><i class="fa fa-whatsapp" title="'.get_string('whatsapp_tel', 'theme_xtec2', $url).'"></i></a>';
+        }
+
         if ($url = get_config('theme_xtec2', 'facebook')) {
 			$content .= '<a href="'.$url.'" target="_blank"><i class="fa fa-facebook" title="Facebook"></i></a>';
 		}

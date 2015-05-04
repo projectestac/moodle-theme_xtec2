@@ -338,11 +338,9 @@ h3{
   line-height: 12px;
   font-size: 12px;
   vertical-align: middle;
-}
-
-#usermenu .dropdown-menu .iconsmall {
   margin: 4px 4px 4px -24px;
 }
+
 
 .dropdown-submenu.icon>a:after {
     margin-top: 8px;
@@ -379,6 +377,32 @@ h3{
 
 #main_menu .navbar-search{
 	margin-left: 15px;
+}
+
+#main_menu .dropdown-menu a:hover{
+    text-decoration: none;
+    color: [[setting:color3]];
+    background-color: [[setting:color2]];
+    background-image: none;
+}
+
+#main_menu .dropdown-menu a {
+  display: block;
+  padding: 2px 1em 2px 28px;
+  color: #333;
+}
+
+#main_menu .dropdown-menu a:hover i.fa {
+    color: [[setting:color3]];
+}
+
+#main_menu .dropdown-menu i.fa {
+  width: 12px;
+  height: 12px;
+  line-height: 12px;
+  font-size: 12px;
+  vertical-align: middle;
+  margin: 4px 4px 4px -24px;
 }
 
 .agora_navbar{
@@ -449,6 +473,10 @@ h3{
 
 #page-footer-top .social-icons .intranet img{
 	background-color: #739cce;
+}
+
+#page-footer-top .social-icons  i.fa-whatsapp{
+    background-color: #34af23;
 }
 
 #page-footer-top .social-icons  i.fa-facebook{

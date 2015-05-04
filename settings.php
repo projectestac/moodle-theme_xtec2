@@ -145,6 +145,12 @@ if ($ADMIN->fulltree) {
         $settings->add($setting);
     }
 
+    $name = 'theme_xtec2/whatsapp';
+    $title = get_string('whatsapp', 'theme_xtec2');
+    $setting = new admin_setting_configtext($name, $title, $description_tel_desc, '', PARAM_TEXT);
+    $setting->set_updatedcallback('theme_xtec2_clean_cache');
+    $settings->add($setting);
+
     $name = 'theme_xtec2/facebook';
     $title = get_string('facebook', 'theme_xtec2');
     $setting = new admin_setting_configtext($name, $title, $description_url_desc, '', PARAM_URL);

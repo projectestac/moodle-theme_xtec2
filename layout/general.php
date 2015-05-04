@@ -37,7 +37,7 @@ if(empty($PAGE->layout_options['nocustommenu'])){
 }
 
 $hasmainmenu = get_config('theme_xtec2','top_menus');
-if($hascustommenu && $hasmainmenu){
+if($hasmainmenu){
     $mainmenu = $OUTPUT->main_menu();
     $hasmainmenu = !empty($mainmenu);
 } else {
