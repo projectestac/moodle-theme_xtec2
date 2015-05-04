@@ -513,12 +513,16 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
             'withpassword' => 'lock',
             'withoutkey' => 'magic',
             'a/download_all' => 'cloud-download',
+            'a/logout' => 'sign-out',
             'i/badge' => 'trophy',
             'i/course' => 'graduation-cap',
+            'i/enrolusers' => 'user-plus',
             'i/marker' => 'lightbulb-o',
             'i/dragdrop' => 'arrows',
+            'i/loading' => 'refresh fa-spin fa-2x',
             'i/loading_small' => 'spinner fa-spin ',
             'i/backup' => 'cloud-download',
+            'i/calendar' => 'calendar',
             'i/checkpermissions' => 'user',
             'i/dragdrop' => 'arrows',
             'i/edit' => 'pencil',
@@ -526,14 +530,19 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
             'i/folder' => 'folder',
             'i/grades' => 'table',
             'i/group' => 'group',
-            'i/groupn' => 'user',
+            'i/groupn' => 'group',
+            'i/groupv' => 'group',
+            'i/groups' => 'group',
             'i/hide' => 'eye-slash',
-            'i/import' => 'upload',
+            'i/import' => 'download',
+            'i/export' => 'upload',
             'i/info' => 'info-circle',
+            'i/item' => 'circle-o',
             'i/move_2d' => 'arrows',
             'i/navigationitem' => 'circle',
             'i/outcomes' => 'pie-chart',
             'i/publish' => 'globe',
+            'i/preview' => 'search',
             'i/reload' => 'refresh',
             'i/report' => 'list-alt',
             'i/restore' => 'cloud-upload',
@@ -541,7 +550,7 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
             'i/roles' => 'user',
             'i/cohort' => 'users',
 			'i/scales' => 'signal',
-            'i/settings' => 'cogs',
+            'i/settings' => 'cog',
             'i/show' => 'eye',
             'i/switchrole' => 'random',
             'i/user' => 'user',
@@ -552,16 +561,18 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
 			't/add' => 'plus',
             'i/assignroles' => 'lock',
 			't/assignroles' => 'lock',
+            't/award' => 'trophy',
 			't/cohort' => 'users',
 			't/delete' => 'times-circle',
-			't/edit' => 'cog',
+			't/edit' => 'pencil',
 			't/right' => 'arrow-right',
             't/left' => 'arrow-left',
-			't/edit_menu' => 'cogs',
-			// 't/hide' => 'eye-slash', Disabled to solve errors hidding activities
+			't/edit_menu' => 'cog',
+			// 't/hide' => 'eye-slash', //Disabled to solve errors hidding activities
 			// 't/show' => 'eye',
 			't/up' => 'arrow-up',
 			't/down' => 'arrow-down',
+            't/download' => 'download',
             't/copy' => 'copy',
             't/lock' => 'unlock',
             't/unlock' => 'lock',
@@ -607,6 +618,30 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
         } else {
             return parent::render_pix_icon($icon);
         }
+    }
+
+    /**
+     * Returns HTML to display a "Turn editing on/off" button in a form.
+     *
+     * @param moodle_url $url The URL + params to send through when clicking the button
+     * @return string HTML the button
+     * Written by G J Barnard
+     */
+    public function edit_button(moodle_url $url) {
+        $url->param('sesskey', sesskey());
+        if ($this->page->user_is_editing()) {
+            $url->param('edit', 'off');
+            $btn = 'btn-danger';
+            $title = get_string('turneditingoff');
+            $icon = 'fa-power-off';
+        } else {
+            $url->param('edit', 'on');
+            $btn = 'btn-success';
+            $title = get_string('turneditingon');
+            $icon = 'fa-edit';
+        }
+        return html_writer::tag('a', html_writer::start_tag('i', array('class' => $icon . ' fa fa-fw')) .
+            html_writer::end_tag('i') . $title, array('href' => $url, 'class' => 'edit-btn btn ' . $btn, 'title' => $title));
     }
 
     public static function agora_alerts() {

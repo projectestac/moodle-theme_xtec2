@@ -389,6 +389,22 @@ h3{
 	vertical-align: top;
 }
 
+.edit-btn i.fa {
+    color: white;
+    margin-right: 0.5em;
+}
+
+.moodle-actionmenu[data-enhanced].show .menu a:hover {
+    color: [[setting:color3]];
+    background-color: [[setting:color2]];
+}
+
+.moodle-actionmenu[data-enhanced].show .menu a:hover i.fa {
+    color: [[setting:color3]];
+}
+
+
+
 /* Footer */
 
 #page-footer{
