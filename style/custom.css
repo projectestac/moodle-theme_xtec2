@@ -92,6 +92,10 @@ h3{
 	padding-top: 0px;
 }
 
+.block.hidden {
+    padding: 0;
+}
+
 .block.no-header{
 	padding-top: 8px;
 }
@@ -135,22 +139,22 @@ h3{
 	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
 }
 
+.block.hidden .header {
+    border-radius: 4px;
+}
+
 .block_course_overview .content h2.title{
 	font-size: 20px;
 }
 
 .block .content {
-	transition: all 0.5s ease;
-	visibility: visible;
-	opacity: 1;
-	max-height: 200000px;
+	display: block;
+    padding: 4px 14px;
 }
 
-.jsenabled .block.hidden .content {
-	visibility: hidden;
-	opacity: 0;
-	max-height: 0;
-	display: block;
+.jsenabled .block.hidden .content, .block.hidden .content {
+	display: none;
+    padding: 0;
 }
 
 .block .minicalendar {
