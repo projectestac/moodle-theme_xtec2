@@ -841,6 +841,12 @@ body.path-grade-report-grader #user-grades {
 		text-align: left;
 	}
 
+    .navbar .brand {
+        margin: 0 0 0 -20px;
+    }
+}
+
+@media (min-width: 979px){
     #main_navigation.navbar .nav>li>a {
         padding: 0;
     }
