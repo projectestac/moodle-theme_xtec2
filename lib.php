@@ -29,8 +29,8 @@
  */
 
 function theme_xtec2_clean_cache(){
-	$cache = cache::make('core', 'htmlpurifier');
-	$cache->delete('social_icons',true);
+    $cache = cache::make('core', 'htmlpurifier');
+    $cache->delete('social_icons',true);
     $cache->delete('agora_alerts',true);
 }
 
@@ -44,7 +44,7 @@ function theme_xtec2_clean_cache(){
  * @return string The parsed CSS The parsed CSS.
  */
 function theme_xtec2_process_css($css, $theme) {
-	global $CFG;
+    global $CFG;
 
     // Set the background image for the logo.
     $logo = $theme->setting_file_url('logo', 'logo');
@@ -55,7 +55,7 @@ function theme_xtec2_process_css($css, $theme) {
     $transparency = !empty($theme->settings->logo_color_transparency) ? $theme->settings->logo_color_transparency : 0;
     $css = theme_xtec2_set_logo_tint($css, $color, $transparency);
 
-	// Set the font size
+    // Set the font size
     $fontsize = !empty($theme->settings->fontsize) ? $theme->settings->fontsize : 'mitjana';
     $css = theme_xtec2_set_fontsize($css, $fontsize);
 
@@ -67,7 +67,19 @@ function theme_xtec2_process_css($css, $theme) {
     $importcss = !empty($theme->settings->importcss) ? "@import url('" . $theme->settings->importcss . "');" : "";
     $css = theme_xtec2_set_importcss($css, $importcss);
 
-    $color2 = !empty($theme->settings->color2) ? $theme->settings->color2 : '#AC2013';
+
+    if (!empty($theme->settings->colorset) && $theme->settings->colorset == 'nodes' &&
+        theme_xtec2_is_service_enabled('nodes')) {
+        $colors = get_colors_from_nodes(true);
+        $color2 = $colors['color2'];
+        $color4 = $colors['color4'];
+        $color5 = $colors['color5'];
+    } else {
+        $color2 = !empty($theme->settings->color2) ? $theme->settings->color2 : '#AC2013';
+        $color4 = !empty($theme->settings->color4) ? $theme->settings->color4 : '#303030';
+        $color5 = !empty($theme->settings->color5) ? $theme->settings->color5 : '#AC2013';
+    }
+
     $css = theme_xtec2_set_color($css, 2, $color2);
 
     // Decide foreground color depending on the other
@@ -83,18 +95,16 @@ function theme_xtec2_process_css($css, $theme) {
     $css = theme_xtec2_set_color($css, '3a', $anticolor3);
     $css = theme_xtec2_set_color($css, '3b', $invert);
 
-
-    $color4 = !empty($theme->settings->color4) ? $theme->settings->color4 : '#303030';
     if (theme_xtec2_get_YIQ($color4) > 135) {
         $color4 = 'black';
     }
     $css = theme_xtec2_set_color($css, 4, $color4);
 
-    $color5 = !empty($theme->settings->color5) ? $theme->settings->color5 : '#AC2013';
     if (theme_xtec2_get_YIQ($color5) > 135) {
         $color5 = 'black';
     }
     $css = theme_xtec2_set_color($css, 5, $color5);
+
 
     // Set custom CSS.
     if (!empty($theme->settings->customcss)) {
@@ -128,7 +138,7 @@ function theme_xtec2_get_YIQ($hexcolor){
 }
 
 function theme_xtec2_set_color($css, $colornumber, $color) {
-	$tag = '[[setting:color'.$colornumber.']]';
+    $tag = '[[setting:color'.$colornumber.']]';
     $css = str_replace($tag, $color, $css);
     return $css;
 }
@@ -161,15 +171,15 @@ function theme_xtec2_set_logo_tint($css, $color, $transparency) {
 }
 
 function theme_xtec2_set_importcss($css, $importcss) {
-	$tag = '[[setting:importcss]]';
+    $tag = '[[setting:importcss]]';
     $css = str_replace($tag, $importcss, $css);
 
     return $css;
 }
 
 function theme_xtec2_set_fontsize($css, $fontsize) {
-	$tag = '[[setting:fontsize]]';
-	switch ($fontsize) {
+    $tag = '[[setting:fontsize]]';
+    switch ($fontsize) {
         case 'moltpetita':
             $fontsize = '10px';
             break;
@@ -183,7 +193,7 @@ function theme_xtec2_set_fontsize($css, $fontsize) {
             $fontsize = '18px';
             break;
         default:
-		case 'mitjana':
+        case 'mitjana':
             $fontsize = '14px';
             break;
     }
@@ -194,8 +204,8 @@ function theme_xtec2_set_fontsize($css, $fontsize) {
 }
 
 function theme_xtec2_set_fontstyle($css, $fontstyle) {
-	$tag = '[[setting:fontstyle]]';
-	switch ($fontstyle) {
+    $tag = '[[setting:fontstyle]]';
+    switch ($fontstyle) {
         case 'lligada':
             $fontstyle = 'font-family: Abecedario!important;';
             break;
@@ -203,7 +213,7 @@ function theme_xtec2_set_fontstyle($css, $fontstyle) {
             $fontstyle = 'text-transform: uppercase;';
             break;
         default:
-		case 'normal':
+        case 'normal':
             $fontstyle = 'font-family: arial, helvetica, clean, sans-serif;';
             break;
     }
@@ -221,7 +231,7 @@ function theme_xtec2_set_fontstyle($css, $fontstyle) {
  * @return string The parsed CSS
  */
 function theme_xtec2_set_logo($css, $logo) {
-	global $OUTPUT;
+    global $OUTPUT;
 
     $tag = '[[setting:logo]]';
     $replacement = $logo;
@@ -305,30 +315,30 @@ function theme_xtec2_get_html_for_settings(renderer_base $output, moodle_page $p
 }
 
 function theme_xtec2_render_dropdown_menu($node, $attrs = array(), $expansionlimit = null, array $options = array()) {
-	global $CFG, $OUTPUT, $PAGE;
+    global $CFG, $OUTPUT, $PAGE;
 
-	if (!$node) {
+    if (!$node) {
         return "";
     }
 
-	if (!$node->display && !$node->contains_active_node()) {
-		return '';
-	}
+    if (!$node->display && !$node->contains_active_node()) {
+        return '';
+    }
 
-	$contenttext = $node->get_content();
+    $contenttext = $node->get_content();
 
     if ($contenttext === '') {
         return "";
     }
 
-	$title = $node->get_title();
-	$liclasses = "";
-	$isexpandable = (empty($expansionlimit) || ($node->type > navigation_node::TYPE_ACTIVITY || $node->type < $expansionlimit) || ($node->contains_active_node() && ($node->children && $node->children->count() > 0)));
+    $title = $node->get_title();
+    $liclasses = "";
+    $isexpandable = (empty($expansionlimit) || ($node->type > navigation_node::TYPE_ACTIVITY || $node->type < $expansionlimit) || ($node->contains_active_node() && ($node->children && $node->children->count() > 0)));
 
-	$attributes = array();
-	if ($title !== '') {
-		$attributes['title'] = $title;
-	}
+    $attributes = array();
+    if ($title !== '') {
+        $attributes['title'] = $title;
+    }
 
     if ($node->icon instanceof renderable && !$node->hideicon && $node->icon->pix != 'i/navigationitem') {
         $icon = $OUTPUT->render($node->icon);
@@ -336,55 +346,79 @@ function theme_xtec2_render_dropdown_menu($node, $attrs = array(), $expansionlim
         $icon = "";
     }
 
-	if (is_string($node->action) || empty($node->action) || ($node->type === navigation_node::TYPE_CATEGORY && empty($options['linkcategories']))) {
-		$action = $icon.$contenttext;
-	} else if ($node->action instanceof action_link) {
-		// TODO: to be replaced with something else
-		$link = $node->action;
+    if (is_string($node->action) || empty($node->action) || ($node->type === navigation_node::TYPE_CATEGORY && empty($options['linkcategories']))) {
+        $action = $icon.$contenttext;
+    } else if ($node->action instanceof action_link) {
+        // TODO: to be replaced with something else
+        $link = $node->action;
         $link->text = $icon.$link->text;
-		$link->attributes = array_merge($link->attributes, $attributes);
-		$action = $OUTPUT->render($link);
-	} else if ($node->action instanceof moodle_url) {
-		$action = html_writer::link($node->action, $icon.$contenttext, $attributes);
-	} else {
+        $link->attributes = array_merge($link->attributes, $attributes);
+        $action = $OUTPUT->render($link);
+    } else if ($node->action instanceof moodle_url) {
+        $action = html_writer::link($node->action, $icon.$contenttext, $attributes);
+    } else {
         return "";
     }
 
-	// this applies to the li item which contains all child lists too
-	$content = $action;
+    // this applies to the li item which contains all child lists too
+    $content = $action;
 
-	if ($node->hidden) {
-		$liclasses = 'disabled';
-	}
+    if ($node->hidden) {
+        $liclasses = 'disabled';
+    }
 
-	if ($isexpandable) {
-		$children = array();
+    if ($isexpandable) {
+        $children = array();
 
-		foreach ($node->children as $child) {
-			$children[] = theme_xtec2_render_dropdown_menu($child, array(), $expansionlimit, $options);
-		}
+        foreach ($node->children as $child) {
+            $children[] = theme_xtec2_render_dropdown_menu($child, array(), $expansionlimit, $options);
+        }
 
-		if (!empty($children)) {
-			if ((!is_string($node->action) && !empty($node->action))) {
-				array_unshift($children, html_writer::tag('li', $action));
-			}
-			$content = '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'.$contenttext.'</a>';
-			$content .= html_writer::tag('ul', implode("\n", $children), array('class' => 'dropdown-menu'));
-			$liclasses .= ' dropdown-submenu pull-left';
-		} else if (empty($node->action)) {
+        if (!empty($children)) {
+            if ((!is_string($node->action) && !empty($node->action))) {
+                array_unshift($children, html_writer::tag('li', $action));
+            }
+            $content = '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'.$contenttext.'</a>';
+            $content .= html_writer::tag('ul', implode("\n", $children), array('class' => 'dropdown-menu'));
+            $liclasses .= ' dropdown-submenu pull-left';
+        } else if (empty($node->action)) {
             // Loaded by ajax but no action
             return "";
         } else {
             // Loaded by ajax but have action
         }
-	}
+    }
 
-	return html_writer::tag('li', $content, array('class' => $liclasses));
+    return html_writer::tag('li', $content, array('class' => $liclasses));
 }
 
 function theme_xtec2_is_service_enabled($service) {
     if (function_exists('is_service_enabled')) {
         return is_service_enabled($service);
     }
+    return false;
+}
+
+function theme_xtec2_show_course_grades($showgrades, $courseid) {
+
+    if (empty($showgrades)) {
+        return false;
+    }
+
+    $coursecontext = context_course::instance($courseid, MUST_EXIST);
+    // Show reports
+    if (has_capability('moodle/grade:viewall', $coursecontext)) {
+        return true;
+    }
+    if ($reports = core_component::get_plugin_list('gradereport')) {     // Get all installed reports
+        arsort($reports); // user is last, we want to test it first
+        foreach ($reports as $plugin => $pluginname) {
+            if (has_capability('gradereport/' . $plugin . ':view', $coursecontext)) {
+                // Stop when the first visible plugin is found
+                return true;
+            }
+        }
+    }
+
     return false;
 }

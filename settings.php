@@ -102,7 +102,6 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
     $settings->add($setting);
 
-
     $description_url_desc = get_string('urldesc', 'theme_xtec2');
     $description_tel_desc = get_string('teldesc', 'theme_xtec2');
     $description_mail_desc = get_string('maildesc', 'theme_xtec2');
@@ -199,6 +198,11 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_xtec2_clean_cache');
     $settings->add($setting);
 
+    $name = 'theme_xtec2/skype';
+    $title = get_string('skype', 'theme_xtec2');
+    $setting = new admin_setting_configtext($name, $title, get_string('skypedesc', 'theme_xtec2'), '', PARAM_URL);
+    $setting->set_updatedcallback('theme_xtec2_clean_cache');
+    $settings->add($setting);
 
     // Select color set
     $setting = new admin_setting_heading('theme_xtec2/color_settings', get_string('color_settings', 'theme_xtec2'), get_string('colorsetdesc', 'theme_xtec2'));
@@ -210,11 +214,19 @@ if ($ADMIN->fulltree) {
     $choices = array('personalitzat' => get_string('custom', 'theme_xtec2'),
                     'grana' => get_string('grana', 'theme_xtec2'),
                     'coral' => get_string('coral', 'theme_xtec2'),
-                    'or' => get_string('or', 'theme_xtec2'),
-                    'llima' => get_string('llima', 'theme_xtec2'),
-                    'tardor' => get_string('tardor', 'theme_xtec2'),
-                    'nostalgia' => get_string('nostalgia', 'theme_xtec2'));
+                    'kellygreen' => get_string('kellygreen', 'theme_xtec2'),
+                    'colourful' => get_string('colourful', 'theme_xtec2'));
+    if (theme_xtec2_is_service_enabled('nodes')) {
+        $colors = get_colors_from_nodes();
+        if ($colors) {
+            $choices['nodes'] = get_string('nodes_color', 'theme_xtec2');
+            $init = 'init_nodes_colors("'.$colors['color2'].'", "'.$colors['color4'].'","'.$colors['color5'].'");';
+            $PAGE->requires->js_init_code($init);
+        }
+    }
+
     $setting = new admin_setting_configselect($name, $title, "", $default, $choices);
+    $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
 
     $name = 'theme_xtec2/color2';

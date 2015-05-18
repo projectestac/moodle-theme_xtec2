@@ -498,6 +498,10 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
 		if ($url = get_config('theme_xtec2', 'youtube')) {
 			$content .= '<a href="'.$url.'" target="_blank"><i class="fa fa-youtube" title="Youtube"></i></a>';
 		}
+        if ($url = get_config('theme_xtec2', 'skype')) {
+            $url = 'skype://'.$url;
+            $content .= '<a href="'.$url.'" target="_blank"><i class="fa fa-skype" title="Skype"></i></a>';
+        }
         $cache->set('social_icons', $content);
         return $content;
     }
@@ -532,6 +536,7 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
             'i/checkpermissions' => 'user',
             'i/dragdrop' => 'arrows',
             'i/edit' => 'pencil',
+            'i/email' => 'envelope-o',
             'i/filter' => 'filter',
             'i/folder' => 'folder',
             'i/grades' => 'table',
@@ -718,6 +723,37 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
             }
         }
         return false;
+    }
+
+    public function course_content_header($onlyifnotcalledbefore = false) {
+                global $CFG;
+        if ($this->page->course->id == SITEID) {
+            // return immediately and do not include /course/lib.php if not necessary
+            return '';
+        }
+        static $functioncalled = false;
+        if ($functioncalled && $onlyifnotcalledbefore) {
+            // we have already output the content header
+            return '';
+        }
+        require_once($CFG->dirroot.'/course/lib.php');
+        $functioncalled = true;
+        $courseformat = course_get_format($this->page->course);
+        $return = "";
+        if (($obj = $courseformat->course_content_header()) !== null) {
+            $return = html_writer::div($courseformat->get_renderer($this->page)->render($obj), 'course-content-header');
+        }
+
+        if ($this->page->pagelayout == 'course' && theme_xtec2_show_course_grades($this->page->course->showgrades, $this->page->course->id)) {
+            $title = get_string('grades');
+            $url = $CFG->wwwroot.'/grade/report/index.php?id=' . $this->page->course->id;
+            $return .= '<div class="agora_navbar">';
+            $return .= html_writer::tag('a', html_writer::start_tag('i', array('class' => 'fa fa-fw fa-table')) .
+                html_writer::end_tag('i') . $title, array('href' => $url, 'class' => 'edit-btn btn btn-primary', 'title' => $title));
+            $return .= '</div>';
+        }
+
+        return $return;
     }
 
 }

@@ -62,6 +62,8 @@ $string['flickr'] = 'Flickr URL';
 $string['linkedin'] = 'LinkedIn URL';
 $string['pinterest'] = 'Pinterest URL';
 $string['youtube'] = 'Youtube URL';
+$string['skype'] = 'Skype username';
+$string['skypedesc'] = 'The URL will be generated with skype://USERNAME';
 $string['phone'] = 'Phone: {$a}';
 $string['email'] = 'Email: {$a}';
 $string['urldesc'] = 'If this field is not empty an icon linking to that URL will be shown in the footer.';
@@ -75,10 +77,9 @@ $string['colorsetdesc'] = 'Choose the color set to use in the theme. You can mod
 $string['custom'] = 'Custom'; //Personalitzat
 $string['grana'] = 'Garnet (default)'; //'Grana (predefinit)'
 $string['coral'] = 'Coral Reef';//'Escull de coral'
-$string['or'] = 'Gold Rush'; //'Febre de l\'or'
-$string['llima'] = 'Fresh Lime'; //'Llima dolça'
-$string['tardor'] = 'Autumn'; //'Tardor'
-$string['nostalgia'] = 'Nostalgia'; //'Nostàlgia'
+$string['kellygreen'] = 'Kelly Green';//'Kelly Green'
+$string['colourful'] = 'Colourful';//'Coloraines'
+$string['nodes_color'] = 'Nodes Palette';//'Nodes'
 
 
 $string['color2'] = 'Background of block headers';

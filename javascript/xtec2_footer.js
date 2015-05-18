@@ -2,6 +2,7 @@
 // Global variables
 var colorset;
 var color2, color4, color5;
+var nodescolor2, nodescolor4, nodescolor5;
 
 var blocks_shown = true;
 var old_main_post_class = '';
@@ -12,6 +13,13 @@ function close_agora_alerts() {
     element.parentNode.removeChild(element);
     return false;
 }
+
+function init_nodes_colors(ncolor2, ncolor4, ncolor5) {
+    nodescolor2 = ncolor2;
+    nodescolor4 = ncolor4;
+    nodescolor5 = ncolor5;
+}
+
 
 function changeColors() {
     colorProfile = colorset.value;
@@ -26,27 +34,20 @@ function changeColors() {
         color4.value = '#00BBBB';
         color5.value = '#008888';
     }
-    else if(colorProfile == 'or') {
-        color2.value = '#E99B00';
-        color4.value = '#0B3D41';
-        color5.value = '#145C61';
+    else if(colorProfile == 'kellygreen') {
+        color2.value = '#349C5F';
+        color4.value = '#B27409';
+        color5.value = '#B27409';
     }
-    else if(colorProfile == 'llima') {
-        color2.value = '#5A6E31';
-        color4.value = '#333333';
-        color5.value = '#74AB00';
+    else if(colorProfile == 'colourful') {
+        color2.value = '#0996B2';
+        color4.value = '#FF0068';
+        color5.value = '#FF006C';
+    } else if(colorProfile == 'nodes') {
+        color2.value = nodescolor2;
+        color4.value = nodescolor4;
+        color5.value = nodescolor5;
     }
-    else if(colorProfile == 'tardor') {
-        color2.value = '#E68804';
-        color4.value = '#344D00';
-        color5.value = '#4E7104';
-    }
-    else if(colorProfile == 'nostalgia') {
-        color2.value = '#457FB9';
-        color4.value = '#457FB9';
-        color5.value = '#457FB9';
-    }
-
 
     var color2pick = color2.parentNode.getElementsByClassName("currentcolour")[0];
     var color4pick = color4.parentNode.getElementsByClassName("currentcolour")[0];

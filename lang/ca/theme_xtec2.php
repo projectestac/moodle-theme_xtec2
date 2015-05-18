@@ -62,6 +62,8 @@ $string['flickr'] = 'URL de Flickr';
 $string['linkedin'] = 'URL de LinkedIn';
 $string['pinterest'] = 'URL de Pinterest';
 $string['youtube'] = 'URL de Youtube';
+$string['skype'] = 'Usuari Skype';
+$string['skypedesc'] = 'La URL es generarà amb skype://USUARI';
 $string['phone'] = 'Telèfon: {$a}';
 $string['email'] = 'Correu electrònic: {$a}';
 $string['urldesc'] = 'Si el camp no està buit, es mostra una icona enllaçada a l\'URL escrita al peu.';
@@ -75,10 +77,9 @@ $string['colorsetdesc'] = 'Trieu la combinació de colors que utilitzarà el tem
 $string['custom'] = 'Personalitzat'; //Personalitzat
 $string['grana'] = 'Grana (predefinit)'; //'Grana (predefinit)'
 $string['coral'] = 'Escull de coral';//'Escull de coral'
-$string['or'] = 'Febre de l\'or'; //'Febre de l\'or'
-$string['llima'] = 'Llima dolça'; //'Llima dolça'
-$string['tardor'] = 'Tardor'; //'Tardor'
-$string['nostalgia'] = 'Nostàlgia'; //'Nostàlgia'
+$string['kellygreen'] = 'Verd Kelly';//'Kelly Green'
+$string['colourful'] = 'Coloraines';//'Coloraines'
+$string['nodes_color'] = 'Paleta de Nodes';//'Nodes'
 
 
 $string['color2'] = 'Fons de les capçaleres dels blocs';
