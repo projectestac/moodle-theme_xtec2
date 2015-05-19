@@ -42,11 +42,15 @@ echo $OUTPUT->doctype() ?>
         </div>
     </nav>
 </header>
-<header id="title-header" class="clearfix visible-desktop">
+<div id="title-header" class="clearfix hidden-phone">
+    <div id="logo-top"></div>
     <div class="container-fluid">
         <?php echo $OUTPUT->page_heading(); ?>
     </div>
-</header>
+</div>
+
+<div id="main_navigation" class="clearfix hidden-phone" style="min-height:36px;">
+</div>
 
 <div id="page" class="container-fluid clearfix">
 
@@ -55,15 +59,21 @@ echo $OUTPUT->doctype() ?>
             <?php echo $OUTPUT->main_content(); ?>
         </section>
     </div>
-
-    <footer id="page-footer">
+</div>
+<footer id="page-footer">
+    <div id="page-footer-top">
         <?php
         echo $OUTPUT->standard_footer_html();
         ?>
-    </footer>
+    </div>
+    <div class="footerlogos clearfix container-fluid">
+        <a href="http://agora.xtec.cat" target="_blank" class="agora_footer"><img src="<?php echo $OUTPUT->pix_url('logo_main', 'theme'); ?>" alt="Àgora" title="" /></a>
+        <a href="http://moodle.org" target="_blank" class="moodle_footer"><img src="<?php echo $OUTPUT->pix_url('logo_moodle', 'theme'); ?>" alt="Moodle" title="Moodle" /></a>
+        <a href="http://www20.gencat.cat/portal/site/ensenyament" class="brand ensenyament visible-phone"><img src="<?php echo $OUTPUT->pix_url('departament', 'theme'); ?>" alt="Departament d'Ensenyament" title="" /></a>
+        <a href="http://www.xtec.cat" class="brand xtec visible-phone"><img src="<?php echo $OUTPUT->pix_url('xtec', 'theme'); ?>" alt="Xarxa Telemàtica Educativa de Catalunya" title="" /></a>
+    </div>
+</footer>
 
-    <?php echo $OUTPUT->standard_end_of_body_html() ?>
-
-</div>
+<?php echo $OUTPUT->standard_end_of_body_html() ?>
 </body>
 </html>
