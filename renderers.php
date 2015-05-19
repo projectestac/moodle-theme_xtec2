@@ -104,21 +104,28 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
         // Get some navigation opts.
         $opts = user_get_user_navigation_info($user, $this->page, $this->page->course);
 
+        $opt = array_pop($opts->navitems); // Get the last item to add it at the end
+
+        $calendar = new stdClass();
+        $calendar->itemtype = 'link';
+        $calendar->url = new moodle_url('/calendar/view.php', array('view' => 'month'));
+        $calendar->title = get_string('calendar', 'calendar');
+        $calendar->pix = 'i/calendar';
+        $opts->navitems[] = $calendar;
+
         // Link: Grades
         $courses = enrol_get_users_courses($user->id, true);
         if (!empty($courses)) {
-            $opt = array_pop($opts->navitems);
-
             $mygrades = new stdClass();
             $mygrades->itemtype = 'link';
             $course = array_shift($courses);
             $mygrades->url = new moodle_url('/grade/report/overview/index.php', array('id' => $course->id));
             $mygrades->title = get_string('mygrades', 'local_agora');
-            $mygrades->pix = "t/grades";
+            $mygrades->pix = 't/grades';
             $opts->navitems[] = $mygrades;
-
-            $opts->navitems[] = $opt;
         }
+
+        $opts->navitems[] = $opt;  // Add the last item at the end
 
         $avatarclasses = "avatars";
         $avatarcontents = html_writer::span($opts->metadata['useravatar'], 'avatar current');
