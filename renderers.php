@@ -377,42 +377,53 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
 
         $currentcourse = $this->page->navigation->get('currentcourse');
         if ($currentcourse  && $currentcourse->has_children()) {
-            $content .= '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" title="'.$currentcourse->get_content().'">';
-            $content .= $currentcourse->get_content().'<b class="caret"></b></a><ul class="dropdown-menu pull-right">';
+            $menucontent = "";
             foreach ($currentcourse->children as $child) {
                 foreach ($child->children as $child2) {
-                    $content .= theme_xtec2_render_dropdown_menu($child2);
+                    $menucontent .= theme_xtec2_render_dropdown_menu($child2);
                 }
             }
-            $content .= '</ul>';
+            if (!empty($menucontent)) {
+                $content .= '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" title="'.$currentcourse->get_content().'">';
+                $content .= $currentcourse->get_content().'<b class="caret"></b></a><ul class="dropdown-menu pull-right">';
+                $content .= $menucontent;
+                $content .= '</ul>';
+            }
         }
 
         $navigation = $this->page->navigation;
         if ($navigation  && $navigation->has_children()) {
-            $content .= '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" title="'.get_string('pluginname', 'block_navigation').'">';
-            $content .= get_string('pluginname', 'block_navigation').'<b class="caret"></b></a><ul class="dropdown-menu pull-right">';
+            $menucontent = "";
             foreach ($navigation->children as $child) {
                 if ($child->key != 'currentcourse' && $child->key != 'home' && $child->key != 'myprofile') {
-                    $content .= theme_xtec2_render_dropdown_menu($child);
+                    $menucontent .= theme_xtec2_render_dropdown_menu($child);
                 }
-
             }
-            $content .= '</ul>';
+            if (!empty($menucontent)) {
+                $content .= '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" title="'.get_string('pluginname', 'block_navigation').'">';
+                $content .= get_string('pluginname', 'block_navigation').'<b class="caret"></b></a><ul class="dropdown-menu pull-right">';
+                $content .= $menucontent;
+                $content .= '</ul>';
+            }
         }
 
         $settings = $this->page->settingsnav;
         if ($settings  && $settings->has_children()) {
-            $content .= '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" title="'.get_string('pluginname', 'block_settings').'">';
-            $content .= get_string('pluginname', 'block_settings').'<b class="caret"></b></a><ul class="dropdown-menu pull-right">';
+            $menucontent = "";
             foreach ($settings->children as $child) {
                 if ($child->key != 'usercurrentsettings') {
-                    $content .= theme_xtec2_render_dropdown_menu($child);
+                    $menucontent .= theme_xtec2_render_dropdown_menu($child);
                 }
             }
             if (has_capability('moodle/site:config', context_system::instance())) {
-                $content .= '<li><form class="navbar-search" method="get" action="'.$CFG->wwwroot.'/'.$CFG->admin.'/search.php"><input type="text" class="search-query" name="query" placeholder="'.get_string('search').'"></form></li>';
+                $menucontent .= '<li><form class="navbar-search" method="get" action="'.$CFG->wwwroot.'/'.$CFG->admin.'/search.php"><input type="text" class="search-query" name="query" placeholder="'.get_string('search').'"></form></li>';
             }
-            $content .= '</ul>';
+            if (!empty($menucontent)) {
+                $content .= '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" title="'.get_string('pluginname', 'block_settings').'">';
+                $content .= get_string('pluginname', 'block_settings').'<b class="caret"></b></a><ul class="dropdown-menu pull-right">';
+                $content .= $menucontent;
+                $content .= '</ul>';
+            }
         }
 
         return $content.'</ul>';
