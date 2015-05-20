@@ -220,7 +220,7 @@ if ($ADMIN->fulltree) {
         $colors = get_colors_from_nodes();
         if ($colors) {
             $choices['nodes'] = get_string('nodes_color', 'theme_xtec2');
-            $init = 'init_nodes_colors("'.$colors['color2'].'", "'.$colors['color4'].'","'.$colors['color5'].'");';
+            $init = 'init_nodes_colors("'.$colors['color'].'", "'.$colors['logo_color'].'");';
             $PAGE->requires->js_init_code($init);
         }
     }

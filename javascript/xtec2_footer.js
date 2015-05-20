@@ -2,7 +2,7 @@
 // Global variables
 var colorset;
 var color2, color4, color5;
-var nodescolor2, nodescolor4, nodescolor5;
+var nodescolor, nodeslogocolor;
 
 var blocks_shown = true;
 var old_main_post_class = '';
@@ -14,10 +14,9 @@ function close_agora_alerts() {
     return false;
 }
 
-function init_nodes_colors(ncolor2, ncolor4, ncolor5) {
-    nodescolor2 = ncolor2;
-    nodescolor4 = ncolor4;
-    nodescolor5 = ncolor5;
+function init_nodes_colors(color, logocolor) {
+    nodescolor = color;
+    nodeslogocolor = logocolor;
 }
 
 
@@ -44,9 +43,12 @@ function changeColors() {
         color4.value = '#FF0068';
         color5.value = '#FF006C';
     } else if(colorProfile == 'nodes') {
-        color2.value = nodescolor2;
-        color4.value = nodescolor4;
-        color5.value = nodescolor5;
+        color2.value = nodescolor;
+        color4.value = nodescolor;
+        color5.value = nodescolor;
+        logocolor.value = nodeslogocolor;
+        var logocolorpick = logocolor.parentNode.getElementsByClassName("currentcolour")[0];
+        logocolorpick.style.backgroundColor = logocolor.value;
     }
 
     var color2pick = color2.parentNode.getElementsByClassName("currentcolour")[0];
@@ -78,10 +80,12 @@ function xtec2_theme_onload() {
         color2 = document.getElementById('id_s_theme_xtec2_color2');
         color4 = document.getElementById('id_s_theme_xtec2_color4');
         color5 = document.getElementById('id_s_theme_xtec2_color5');
+        logocolor = document.getElementById('id_s_theme_xtec2_logo_color');
 
         color2.addEventListener('input', changeToPersonalized, false);
         color4.addEventListener('input', changeToPersonalized, false);
         color5.addEventListener('input', changeToPersonalized, false);
+        logocolor.addEventListener('input', changeToPersonalized, false);
 
         colorset.addEventListener('change', changeColors, false);
     }

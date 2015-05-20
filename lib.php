@@ -50,10 +50,25 @@ function theme_xtec2_process_css($css, $theme) {
     $logo = $theme->setting_file_url('logo', 'logo');
     $css = theme_xtec2_set_logo($css, $logo);
 
+
+    $color2 = !empty($theme->settings->color2) ? $theme->settings->color2 : '#AC2013';
+    $color4 = !empty($theme->settings->color4) ? $theme->settings->color4 : '#303030';
+    $color5 = !empty($theme->settings->color5) ? $theme->settings->color5 : '#AC2013';
+    $logocolor = !empty($theme->settings->logo_color) ? $theme->settings->logo_color : '#675A70';
+    if (!empty($theme->settings->colorset) && $theme->settings->colorset == 'nodes' &&
+        theme_xtec2_is_service_enabled('nodes')) {
+        $colors = get_colors_from_nodes(true);
+        if ($colors) {
+            $color2 = $colors['color'];
+            $color4 = $colors['color'];
+            $color5 = $colors['color'];
+            $logocolor = $colors['logo_color'];
+        }
+    }
+
     // Set the tint logo color
-    $color = !empty($theme->settings->logo_color) ? $theme->settings->logo_color : '#675A70';
     $transparency = !empty($theme->settings->logo_color_transparency) ? $theme->settings->logo_color_transparency : 0;
-    $css = theme_xtec2_set_logo_tint($css, $color, $transparency);
+    $css = theme_xtec2_set_logo_tint($css, $logocolor, $transparency);
 
     // Set the font size
     $fontsize = !empty($theme->settings->fontsize) ? $theme->settings->fontsize : 'mitjana';
@@ -66,19 +81,6 @@ function theme_xtec2_process_css($css, $theme) {
     // Configure import CSS
     $importcss = !empty($theme->settings->importcss) ? "@import url('" . $theme->settings->importcss . "');" : "";
     $css = theme_xtec2_set_importcss($css, $importcss);
-
-
-    if (!empty($theme->settings->colorset) && $theme->settings->colorset == 'nodes' &&
-        theme_xtec2_is_service_enabled('nodes')) {
-        $colors = get_colors_from_nodes(true);
-        $color2 = $colors['color2'];
-        $color4 = $colors['color4'];
-        $color5 = $colors['color5'];
-    } else {
-        $color2 = !empty($theme->settings->color2) ? $theme->settings->color2 : '#AC2013';
-        $color4 = !empty($theme->settings->color4) ? $theme->settings->color4 : '#303030';
-        $color5 = !empty($theme->settings->color5) ? $theme->settings->color5 : '#AC2013';
-    }
 
     $css = theme_xtec2_set_color($css, 2, $color2);
 
