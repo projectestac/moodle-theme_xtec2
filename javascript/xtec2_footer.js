@@ -40,8 +40,8 @@ function changeColors() {
     }
     else if(colorProfile == 'colourful') {
         color2.value = '#0996B2';
-        color4.value = '#FF0068';
-        color5.value = '#FF006C';
+        color4.value = '#BF1D61';
+        color5.value = '#BF1D61';
     } else if(colorProfile == 'nodes') {
         color2.value = nodescolor;
         color4.value = nodescolor;
