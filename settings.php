@@ -34,15 +34,16 @@ if ($ADMIN->fulltree) {
 
     require_once($CFG->dirroot.'/theme/xtec2/lib.php');
 
-	global $PAGE;
-	$PAGE->requires->js_init_code('xtec2_theme_onload();');
+    global $PAGE;
+    $PAGE->requires->js('/theme/xtec2/javascript/config.js');
+    $PAGE->requires->js_init_code('xtec2_theme_onload();');
 
     // Header settings
-    $setting = new admin_setting_heading('theme_xtec2/header_settings', get_string('header_settings', 'theme_xtec2'),"");
+    $setting = new admin_setting_heading('theme_xtec2/header_settings', get_string('header_settings', 'theme_xtec2'), "");
     $settings->add($setting);
 
     $name = 'theme_xtec2/logo';
-    $title = get_string('logo','theme_xtec2');
+    $title = get_string('logo', 'theme_xtec2');
     $description = get_string('logodesc', 'theme_xtec2');
     $setting = new admin_setting_configstoredfile($name, $title, $description, 'logo');
     $setting->set_updatedcallback('theme_reset_all_caches');
@@ -77,7 +78,7 @@ if ($ADMIN->fulltree) {
     $settings->add($setting);
 
     // Layout settings
-    $setting = new admin_setting_heading('theme_xtec2/layout_settings', get_string('layout_settings', 'theme_xtec2'),"");
+    $setting = new admin_setting_heading('theme_xtec2/layout_settings', get_string('layout_settings', 'theme_xtec2'), "");
     $settings->add($setting);
 
     $name = 'theme_xtec2/block_layout';
