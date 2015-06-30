@@ -587,6 +587,7 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
 			'i/twoway' => 'arrows-h',
 			'i/withsubcat' => 'indent',
 			'i/permissions' => 'key',
+            'i/rss' => 'rss-square',
 			't/add' => 'plus',
             'i/assignroles' => 'lock',
 			't/assignroles' => 'lock',
