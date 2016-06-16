@@ -758,6 +758,10 @@ table#permissions tbody tr.selectedrow:hover>th {
 	background-color: #ffd;
 }
 
+.path-mod-forum :target ~ .forumpost:before {
+    background: [[setting:color2]];;
+}
+
 .calendar-event-panel .yui3-overlay-content h2.eventtitle{
 	font-size: 1.6em;
 }
