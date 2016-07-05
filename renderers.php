@@ -132,6 +132,20 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
         return $content;
     }
 
+    /*
+     * This code renders the custom lang items
+     */
+    protected function render_lang($lang, $langname, $url, $currentlang) {
+        $class = 'lang fa';
+        if ($langname === $currentlang) {
+            $class.= ' current-lang';
+            $content = '<li title="'.$langname.'" class="'.$class.'">'.$lang.'</li>';
+        } else  {
+            $content = '<li class="'.$class.'"><a href="'.$url.'" title="'.$langname.'">'.$lang.'</a></li>';
+        }
+        return $content;
+    }
+
     public function main_menu() {
         global $CFG;
 
@@ -212,18 +226,29 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
         } else {
             $currentlang = $strlang;
         }
-        foreach ($langs as $langtype => $langname) {
-            $menu->add($langname, new moodle_url($this->page->url, array('lang' => $langtype)), $langname);
+
+        if ( sizeof($langs) > 5){
+            // If there are more than 5 langs, show a list
+            foreach ($langs as $langtype => $langname) {
+                $menu->add($langname, new moodle_url($this->page->url, array('lang' => $langtype)), $langname);
+            }
+    		$content = '<div class="btn-group dropup langmenu">';
+    		$content .= '<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">'.$currentlang;
+    		$content .= '<span class="caret"></span>';
+    		$content .= '</a>';
+    		$content .= '<ul class="dropdown-menu pull-right">';
+            foreach ($menu->get_children() as $item) {
+                $content .= $this->render_custom_menu_item($item, 1);
+            }
+        } else {
+            $content = '<ul>';
+            foreach ($langs as $langtype => $langname) {
+                $url = new moodle_url($this->page->url, array('lang' => $langtype));
+                $content .= $this->render_lang($langtype, $langname, $url, $currentlang);
+            }
+            $content.= '</ul>';
         }
 
-		$content = '<div class="btn-group dropup langmenu">';
-		$content .= '<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">'.$currentlang;
-		$content .= '<span class="caret"></span>';
-		$content .= '</a>';
-		$content .= '<ul class="dropdown-menu pull-right">';
-        foreach ($menu->get_children() as $item) {
-            $content .= $this->render_custom_menu_item($item, 1);
-        }
 
         return $content.'</ul></div>';
     }
