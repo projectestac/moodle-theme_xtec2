@@ -21,6 +21,11 @@ body{
     scrollbar-arrow-color: #333;
 }
 
+i > img {
+	display: none;
+	visibility: hidden;
+}
+
 ::-webkit-scrollbar {
   background-color: #DDD;
 }

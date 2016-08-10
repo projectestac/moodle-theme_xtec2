@@ -435,7 +435,7 @@ class theme_xtec2_core_renderer extends theme_bootstrapbase_core_renderer {
 			}
 
 			// unset($icon->attributes['alt']);
-            return html_writer::tag('i', '', $icon->attributes);
+            return html_writer::tag('i', html_writer::tag('img', ''), $icon->attributes);
         } else {
             return parent::render_pix_icon($icon);
         }
