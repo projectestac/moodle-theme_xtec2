@@ -15,7 +15,7 @@ body{
     [[setting:fontstyle]];
     scrollbar-face-color: [[setting:color5]];
     scrollbar-highlight-color: #DDD;
-    scrollbar-3dlight-color: #DDD
+    scrollbar-3dlight-color: #DDD;
     scrollbar-darkshadow-color: [[setting:color5]];
     scrollbar-track-color: #DDD;
     scrollbar-arrow-color: #333;
@@ -729,7 +729,6 @@ input.form-submit, input#id_submitbutton, input#id_submitbutton2, .path-admin .b
 	background-image: -webkit-gradient(linear,0 0,0 150%,from(rgba(255,255,255,0.2)),to(rgba(0,0,0,0.2)));
 	background-image: -webkit-linear-gradient(top,rgba(255,255,255,0.2),rgba(0,0,0,0.2));
 	background-image: -o-linear-gradient(top,rgba(255,255,255,0.2),rgba(0,0,0,0.2));
-	background-image: linear-gradient(to bottom,rgba(255,255,255,0.2),rgba(0,0,0,0.2));
 	background-image: linear-gradient(to bottom,rgba(255,255,255,0.2),rgba(0,0,0,0.2));
 	border-color: [[setting:color2]];
 	border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);

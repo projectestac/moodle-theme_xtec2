@@ -63,13 +63,14 @@ i.fa.icon-pre, .dir-rtl i.fa.icon-post {
 .block .header .commands i.fa.actionmenu {
 	width: auto;
 }
+
 .block_settings .block_tree li.item_with_icon > p i.fa,
 .block_navigation .block_tree li.item_with_icon > p i.fa {
 	vertical-align: middle;
 	left: 0;
 	width: 16px;
 	height: 16px;
-	line-height: 20px;
+	line-height: 14px;
 	font-size: 16px;
     margin-left: 10px;
 }
