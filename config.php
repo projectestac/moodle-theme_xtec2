@@ -190,4 +190,4 @@ $THEME->layouts = array(
 );
 
 $THEME->javascripts_footer = array('xtec2_footer');
-
+$THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
