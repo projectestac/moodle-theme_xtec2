@@ -1051,5 +1051,10 @@ div.editor_atto_content table table,
     }
 }
 
+div.moodle-dialogue-wrap div.fp-toolbar i.fa.icon,
+div.moodle-dialogue-wrap div.fp-viewbar i.fa.icon {
+    padding: 7px;
+}
+
 /* Custom CSS Settings */
 [[setting:customcss]]
